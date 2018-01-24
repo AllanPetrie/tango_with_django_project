@@ -8,7 +8,6 @@ def index(request):
 def about(request):
     context_dict = {}
     return render(request, "rango/about.html", context=context_dict)
-    ##HttpResponse("Rango says this is the about page.")
 
 
 

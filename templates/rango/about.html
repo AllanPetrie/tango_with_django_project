@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 
+{% load staticfiles %}
+
 <html>
 
 <head>
@@ -9,10 +11,14 @@
 <body>
 	<h1>Rango says...</h1>
 	<div>
-		this is the about page <bre />
+		this is the about page <br />
+		this project was put together by Allan Petrie <br />
+		<img src="{{MEDIA_URL}}cat.jpg" /> 	
 	</div>
 	<div>
-		<a href="/rango/">Index</a>
+		<a href="/rango/">Index</a> <br />
+		<img src="{%static "images/django.jpg" %}"
+			alt="Picture of django" />
 	</div>
 </body>
 
