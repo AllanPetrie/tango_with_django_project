@@ -1,6 +1,6 @@
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                      "tango_with_django_project.settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'tango_with_django_project.settings')
 
 import django
 django.setup()
@@ -11,39 +11,47 @@ def populate():
 
     ##list of dictionaries of pages to be added
     python_pages = [
-        {"title": "Official Python Tutorial",
-         "url": "https://docs.python.org/2/tutorial/"},
-        {"title": "How To Think LIke A Computer Scientist",
-         "url": "http://www.greeteapress.com/thinkpython/"},
-        {"title":"Learn Python in 10 Minutes",
-         "url":"http://www.korokithakis.net/tutorials/python/"},
+        {'title': 'Official Python Tutorial',
+         'url': 'https://docs.python.org/2/tutorial/',
+         'views': 25},
+        {'title': 'How To Think Like A Computer Scientist',
+         'url': 'http://www.greeteapress.com/thinkpython/',
+         'views': 43},
+        {'title':'Learn Python in 10 Minutes',
+         'url':'http://www.korokithakis.net/tutorials/python/',
+         'views': 31},
         ]
 
     django_pages = [
-        {"title": "Official Django Tutorial",
-         "url": "https://docs.djangoproject.com/en/1.9/intro/tutorial01/"},
-        {"title": "Django Rocks",
-         "url": "http://www.djangorocks.com"},
-        {"title": "How to Tango with Django",
-         "url": "http://www.tangowithdjango.com/"},
+        {'title': 'Official Django Tutorial',
+         'url': 'https://docs.djangoproject.com/en/1.9/intro/tutorial01/',
+         'views': 60},
+        {'title': 'Django Rocks',
+         'url': 'http://www.djangorocks.com',
+         'views': 31},
+        {'title': 'How to Tango with Django',
+         'url': 'http://www.tangowithdjango.com/',
+         'views': 55},
         ]
 
     other_pages = [
-        {"title": "Bottle",
-         "url": "http://bottlepy.org/docs/dev/"},
-        {"title": "Flask",
-         "url": "http://flask.pocoo.org"},
+        {'title': 'Bottle',
+         'url': 'http://bottlepy.org/docs/dev/',
+         'views': 31},
+        {'title': 'Flask',
+         'url': 'http://flask.pocoo.org',
+         'views': 11},
         ]
 
-    cats = {"Python": {"pages": python_pages, "views": 31, "likes": 19},
-            "Django": {"pages": django_pages, "views": 64, "likes": 32},
-            "Other_frameworks": {"pages": other_pages, "views": 46, "likes": 13},
+    cats = {'Python': {'pages': python_pages, 'views': 31, 'likes': 19},
+            'Django': {'pages': django_pages, 'views': 64, 'likes': 32},
+            'Other_frameworks': {'pages': other_pages, 'views': 46, 'likes': 13},
             }
 
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["views"], cat_data["likes"])
         for p in cat_data["pages"]:
-            add_page(c, p["title"], p["url"])
+            add_page(c, p["title"], p["url"], p["views"])
 
     for c in Category.objects.all():
         for p in Page.objects.filter(category = c):
@@ -54,7 +62,7 @@ def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
     p.views=views
-    p.save
+    p.save()
     return p
 
 def add_cat(name, views=0, likes=0):
